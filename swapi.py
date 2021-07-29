@@ -16,7 +16,6 @@ def fetch_num_people ():
     else:
         return "NO DATA"
       
-      people
 def people_dframe():
     columns = ["name","height","birth_year","gender","homeworld","films", "vehicles","starships"]
     swapi_df= pd.DataFrame(columns=columns)
@@ -30,6 +29,16 @@ def people_dframe():
         swapi_df.loc[index,'vehicles']=row['vehicles']
         swapi_df.loc[index,'starships']=row['starships']
     return swapi_df
+
+def fetch_all_people():
+    datalist=[]
+    for i in range (1, fetch_num_people()+2):
+        url = f'{uri}{str(i)}'
+        r_people = requests.get(url)
+        if r_people.status_code == 200:
+            data_people = r_people.json()
+            datalist.append(data_people)
+    return datalist
 
 #print(people_dframe())
 
@@ -67,16 +76,6 @@ def create_starship_dataframe():
         starship_df.loc[index,'passengers'] = row['passengers']
         starship_df.loc[index,'starship_class'] = row['starship_class']
     return starship_df
-
-def fetch_all_people():
-    datalist=[]
-    for i in range (1, fetch_num_people()+2):
-        url = f'{uri}{str(i)}'
-        r_people = requests.get(url)
-        if r_people.status_code == 200:
-            data_people = r_people.json()
-            datalist.append(data_people)
-    return datalist
 
 #PLANETS
 
