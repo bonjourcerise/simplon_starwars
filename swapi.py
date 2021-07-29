@@ -1,6 +1,3 @@
-import requests
-import pandas as pd
-
 #PLANETS
 
 def fetch_planets(n_planets):
@@ -20,4 +17,4 @@ for index, row in enumerate(list_planets):
     df_planets.loc[index,'terrain'] = row['terrain']
     df_planets.loc[index,'population'] = row['population']
     
-df_planets
+#df_planets
